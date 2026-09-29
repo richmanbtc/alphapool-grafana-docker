@@ -1,6 +1,6 @@
 # Custom Grafana image
 
-Builds from `grafana/grafana:13.2.2` with `grafana-bigquery-datasource`
+Builds from `grafana/grafana:13.2.2` with `grafana-bigquery-datasource` 3.4.2
 installed at build time. The root Dockerfile is for the development environment;
 the image Dockerfile is in `docker/grafana`.
 
@@ -23,9 +23,16 @@ manual runs on other branches only build. The repository variable is required
 for all runs; login secrets are only used when publishing.
 
 The workflow publishes `linux/amd64` images with `13.2.2`, `latest`, and
-`sha-<commit>` tags. The plugin version is resolved at build time, so uncached
-rebuilds may produce different contents. Clear the build cache to refresh it.
+`sha-<commit>` tags. The plugin version is pinned in the Dockerfile.
 
 Plugins are stored separately from Grafana's persistent data directory, allowing
 data volumes without hiding the bundled plugin. Configure the BigQuery data
 source and its credentials separately in Grafana.
+
+## Redistribution
+
+Paste [Third-party notices](docker/grafana/THIRD_PARTY_NOTICES.md) into the
+Docker Hub Overview before publishing; this is not automated. The same document
+is included in the image, along with existing upstream licenses.
+When upgrading, update the notices and Overview together, preserve upstream
+LICENSE/NOTICE files, and keep corresponding source downloads available.
